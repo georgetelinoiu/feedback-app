@@ -24,6 +24,7 @@ router.route('/cursuri/:id')
     .patch((req, res) => saveCurs(req ,res))
     .delete((req, res) => removeCurs(req, res));
 
+
 router.route('/feedbacks/')
     .get((req, res) => getFeedbacks(req, res))
     .post((req, res) => addFeedback(req, res));

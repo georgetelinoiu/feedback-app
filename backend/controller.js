@@ -34,7 +34,7 @@ async function getStudent(req, res){
 
 async function addStudent(req, res){
     try{
-        if(req.body.id && req.body.nume && req.body.prenume){
+        if(req.body.id && req.body.nume && req.body.prenume && req.body.idCurs){
             await Student.create(req.body);
             res.status(201).send("Created");
         }
@@ -179,6 +179,7 @@ async function getFeedbacks(req, res) {
     }
 }
 
+
 async function getFeedback(req, res){
     try{
         if (req.params.id) {
@@ -262,8 +263,7 @@ async function addProfesor(req, res){
     }
 }
 
-
 export {getStudents, addStudent, getStudent, saveStudent, removeStudent, 
         getCursuri, addCurs, getCurs, saveCurs, removeCurs,
         getFeedbacks, addFeedback, getFeedback,
-        getProfesori, getProfesor, addProfesor };
+        getProfesori, addProfesor, getProfesor};

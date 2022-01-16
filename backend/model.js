@@ -9,7 +9,7 @@ const sequelize = new Sequelize('feedback', 'root', '', {
 
 const Student = sequelize.define('student', {
     id:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true
     },
@@ -48,10 +48,6 @@ const Curs = sequelize.define("curs", {
     denumire: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    cod: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
     },
     data: {
         type: Sequelize.DATE, 
