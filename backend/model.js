@@ -33,8 +33,8 @@ const Feedback = sequelize.define("feedback", {
         type: Sequelize.STRING,
         allowNull: false
     },
-    idCurs: {
-        type: Sequelize.INTEGER,
+    data:{
+        type: Sequelize.DATE,
         allowNull: false
     }
 });
@@ -49,15 +49,15 @@ const Curs = sequelize.define("curs", {
         type: Sequelize.STRING,
         allowNull: false
     },
+    cod: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+    },
     data: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE, 
         allowNull: false
     },
     durata: {
-        type: Sequelize.TIME,
-        allowNull: false
-    },
-    idProfesor: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
@@ -84,9 +84,14 @@ async function syncDB() {
     await sequelize.sync({ alter: true });
 }
 
-Curs.hasMany(Student, {foreignKey: 'id'});
+Curs.hasMany(Student, {foreignKey: 'idCurs'});
+Student.belongsTo(Curs, {foreignKey: 'idCurs'});
+
 Curs.hasMany(Feedback, {foreignKey: 'idCurs'});
+Feedback.belongsTo(Curs, {foreignKey: 'idCurs'});
+
 Profesor.hasMany(Curs, {foreignKey: 'idProfesor'});
-// Student.belongsToMany(Curs, {foreignKey: 'id'});
+Curs.belongsTo(Profesor, {foreignKey: 'idProfesor'});
+
 
 export {Student, Feedback, Curs, Profesor, syncDB};
