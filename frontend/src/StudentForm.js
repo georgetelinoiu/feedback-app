@@ -28,12 +28,11 @@ function StudentForm() {
                 body: JSON.stringify(student)
             });
             if (response.status === 201) {
-                navigate('/');
+                navigate(`/feedback/${student.idCurs}`);
                 console.log(response.status);
             }
         }
-        else console.log('Nu am gasit');
-
+        else alert('Cursul nu a fost gasit! Incercati alt cod!');
     }
 
     function set(property, value) {

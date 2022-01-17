@@ -5,6 +5,10 @@ import {HashRouter, Routes, Route} from 'react-router-dom';
 import Intro from './intro';
 import StudentForm from './StudentForm';
 import ProfesorForm from './ProfesorForm';
+import FeedbackForm from './FeedbackForm';
+import CursuriForm from './CursuriForm';
+
+
 
 ReactDOM.render(
   <HashRouter>
@@ -12,6 +16,8 @@ ReactDOM.render(
       <Route exact path="/" element={<Intro/>}/>
       <Route path="/students" element={<StudentForm/>}/>
       <Route path="/profesori" element={<ProfesorForm/>}/>
+      <Route path = "/feedback/:cursId" element = {<FeedbackForm/>}/>
+      <Route path = "/cursuri/" element = {<CursuriForm/>}/>
     </Routes>
   </HashRouter>,
   document.getElementById('root')

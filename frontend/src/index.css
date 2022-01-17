@@ -192,6 +192,10 @@ a:visited{
   color:black;
 }
 
+a{
+  color:black;
+}
+
 /* formular student */
 
 .form {
@@ -308,3 +312,62 @@ a:visited{
   background-color: #06b;
 }
 
+
+/* 
+  FeedbackForm - cele 4 patrate
+*/
+
+.quarter:first-child {
+  background: red;
+}
+.quarter:nth-child(2) {
+  background: blue;
+}
+.quarter:nth-child(3) {
+  background: green;
+}
+.quarter:nth-child(4) {
+  background: purple;
+}
+
+.quarter {
+  margin-top: 50px;
+  margin-left: 110px;
+  margin-bottom: 30px;
+  height: 250px;
+  width: 600px;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:50px;
+  border-radius: 20px;
+ } 
+
+
+ #denCurs{
+  text-align: center;
+ }
+
+
+ /* scrollbar */
+
+ /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

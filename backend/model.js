@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-const sequelize = new Sequelize('feedback', 'root', '', {
+const sequelize = new Sequelize('feedback', 'root', 'Divizibilitate', {
     host: 'localhost',
     dialect: 'mysql',
     define: {
@@ -25,7 +25,7 @@ const Student = sequelize.define('student', {
 
 const Feedback = sequelize.define("feedback", {
     id:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true
     },
@@ -61,7 +61,7 @@ const Curs = sequelize.define("curs", {
 
 const Profesor = sequelize.define("profesor", {
     id:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         primaryKey: true
     },
