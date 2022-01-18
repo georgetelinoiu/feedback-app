@@ -82,13 +82,17 @@ function FeedbackForm() {
         feedback['data'] = getDate();
     }
 
-    function stringOraFinal(data) {
-        var oraIncepere = data.split('T')[1].split('.')[0];
-        var ora = parseInt(oraIncepere.split(':')[0]);
-        var minute = parseInt(oraIncepere.split(':')[1]);
+    function stringOraFinal(oraIncepere) {
+        var ora = parseInt(oraIncepere.substring(0,2));
+        console.log(ora);
+        var minute = parseInt(oraIncepere.substring(3,5));
+        console.log(minute);
         var durata = parseInt(curs.durata);
-        var ore = durata / 60;
+        console.log(durata);
+        var ore = Math.floor(durata / 60);
+        console.log(ore);
         minute += durata % 60;
+        console.log(minute);
         ora += ore;
         if (minute > 60) {
             ora++;
@@ -113,10 +117,10 @@ function FeedbackForm() {
         return rezultat;
     }
 
-    return (<div>
+    return (<div className="feedbackFormDiv">
         <h1 id="denCurs">Oferiti feedback pentru cursul {curs.denumire}</h1>
-        <h1 id="denCurs">Ora incepere curs: {curs.data}</h1>
-        <h1 id="denCurs">Ora incheiere curs: {curs.data}</h1>
+        <h1 id="denCurs">Ora incepere curs: {curs.data.substring(11,16)}</h1>
+        <h1 id="denCurs">Ora incheiere curs: {stringOraFinal(curs.data.substring(11,16))}</h1>
         <div>
             <div className="quarter" onClick={() => { setTip(1); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128512;</div>
             <div className="quarter" onClick={() => { setTip(2); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128543;</div>

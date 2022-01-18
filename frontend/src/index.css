@@ -202,9 +202,12 @@ a{
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 500px;
+  height: auto;
   padding: 20px;
-  width: 320px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
 
 .title {
@@ -370,4 +373,29 @@ a{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* .feedbackFormDiv{
+  overflow: scroll;
+} */
+
+.infoCurs{
+margin-top: 10px;
+align-items: center;
+text-align: center;
+}
+
+.feedbackRow{
+  font-size: 22px;
+  background-color: #08d;
+  border-radius: 12px;
+  border: 0;
+  box-sizing: border-box;
+  color: #eee;
+  height: 50px;
+  outline: 0;
+  text-align: center;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }

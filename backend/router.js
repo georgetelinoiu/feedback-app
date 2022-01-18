@@ -1,7 +1,7 @@
 import express from 'express';
 import { getStudents, addStudent, getStudent, saveStudent, removeStudent, 
         getCursuri, addCurs, getCurs, saveCurs, removeCurs,
-        getFeedbacks, addFeedback, getFeedback,
+        getFeedbacks, addFeedback, getFeedback, getFeedbackCurs,
         getProfesori, getProfesor, addProfesor } from './controller.js';
 
 const router = express.Router();
@@ -29,8 +29,9 @@ router.route('/feedbacks/')
     .get((req, res) => getFeedbacks(req, res))
     .post((req, res) => addFeedback(req, res));
 
-router.route('/feedbacks/:id')
-    .get((req, res)=>getFeedback(req, res));
+router.route('/feedbacks/:idCurs')
+    //.get((req, res)=>getFeedback(req, res))  -> inlocuim get feedback dupa id-ul lui ca sa implementez search dupa idCurs
+    .get((req,res) =>getFeedbackCurs(req,res));
 
 router.route('/profesori/')
     .get((req, res) => getProfesori(req, res))

@@ -197,6 +197,27 @@ async function getFeedback(req, res){
 	}
 }
 
+async function getFeedbackCurs(req, res){
+    try{
+        if (req.params.idCurs) {
+			const feedback = await Feedback.findAll({
+                where: {
+                    idCurs : req.params.idCurs
+                }
+            })
+			if (feedback) {
+				res.json(feedback);
+			} else {
+				res.status(404).send("Not found");
+			}
+		} else {
+			res.status(400).send("Da");
+		}
+	} catch (error) {
+		res.status(500).send("Eroare");
+	}
+}
+
 async function addFeedback(req, res){
     try{
         if(req.body.id && req.body.tip && req.body.data){
@@ -265,5 +286,5 @@ async function addProfesor(req, res){
 
 export {getStudents, addStudent, getStudent, saveStudent, removeStudent, 
         getCursuri, addCurs, getCurs, saveCurs, removeCurs,
-        getFeedbacks, addFeedback, getFeedback,
+        getFeedbacks, addFeedback, getFeedback, getFeedbackCurs,
         getProfesori, addProfesor, getProfesor};

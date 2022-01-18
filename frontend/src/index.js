@@ -17,7 +17,7 @@ ReactDOM.render(
       <Route path="/students" element={<StudentForm/>}/>
       <Route path="/profesori" element={<ProfesorForm/>}/>
       <Route path = "/feedback/:cursId" element = {<FeedbackForm/>}/>
-      <Route path = "/cursuri/" element = {<CursuriForm/>}/>
+      <Route path = "/cursuri/:cursId" element = {<CursuriForm/>}/>
     </Routes>
   </HashRouter>,
   document.getElementById('root')
