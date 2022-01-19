@@ -34,30 +34,44 @@ function FeedbackForm() {
     useEffect(() => loadCurs(cursId), [cursId]);
 
     async function sendFeedback() {
+        var check = true;
         console.log(feedback);
-        const response = await fetch('/api/feedbacks/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(feedback)
-        });
-        if (response.status === 201) {
+        var currentDate = new Date();
+        var thisHour = currentDate.getHours();
+        var thisMinute = currentDate.getMinutes();
+        var endTime = stringOraFinal(curs.data.substring(11, 16));
+        if (parseInt(thisMinute) < 10) thisMinute = "0" + thisMinute;
+        console.log(thisHour + ":" + thisMinute);
+        var endHour = endTime.substring(0, 2);
+        var endMinute = endTime.substring(3, 5);
+        if (parseInt(thisHour) > parseInt(endHour)) check = false;
+        else if (parseInt(thisHour) === parseInt(endHour) && parseInt(thisMinute) > parseInt(endMinute)) check = false; 
+        if (check) {
+            const response = await fetch('/api/feedbacks/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(feedback)
+            });
+            if (response.status === 201) {
 
-            console.log(response.status);
+                console.log(response.status);
+            }
         }
+        else alert('A expirat timpul de primire feedback pentru curs!');
     }
 
 
     function getDate() {
         var date;
         date = new Date();
-        date = date.getUTCFullYear() + '-' +
-            ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
-            ('00' + date.getUTCDate()).slice(-2) + ' ' +
-            ('00' + date.getUTCHours()).slice(-2) + ':' +
-            ('00' + date.getUTCMinutes()).slice(-2) + ':' +
-            ('00' + date.getUTCSeconds()).slice(-2);
+        date = date.getFullYear() + '-' +
+            ('00' + (date.getMonth() + 1)).slice(-2) + '-' +
+            ('00' + date.getDate()).slice(-2) + ' ' +
+            ('00' + date.getHours()).slice(-2) + ':' +
+            ('00' + date.getMinutes()).slice(-2) + ':' +
+            ('00' + date.getSeconds()).slice(-2);
         return date;
     }
 
@@ -79,20 +93,16 @@ function FeedbackForm() {
     }
 
     function setData() {
-        feedback['data'] = getDate();
+        var data = getDate();
+        feedback['data'] = data;
     }
 
     function stringOraFinal(oraIncepere) {
-        var ora = parseInt(oraIncepere.substring(0,2));
-        console.log(ora);
-        var minute = parseInt(oraIncepere.substring(3,5));
-        console.log(minute);
+        var ora = parseInt(oraIncepere.substring(0, 2)) + 2; //offset pt ca se adauga in UTC dintr-un motiv sau altul
+        var minute = parseInt(oraIncepere.substring(3, 5));
         var durata = parseInt(curs.durata);
-        console.log(durata);
         var ore = Math.floor(durata / 60);
-        console.log(ore);
         minute += durata % 60;
-        console.log(minute);
         ora += ore;
         if (minute > 60) {
             ora++;
@@ -112,20 +122,36 @@ function FeedbackForm() {
 
     }
 
-    function inceputCurs(data){
-        var rezultat = data.split('T')[1].split('.')[0].split(':')[0] + ":" + curs.data.split('T')[1].split('.')[0].split(':')[1];
-        return rezultat;
+    function parseOra(oraIncepere){
+        var ora = parseInt(oraIncepere.substring(0, 2)) + 2; //offset pt ca se adauga in UTC dintr-un motiv sau altul
+        var minute = parseInt(oraIncepere.substring(3, 5));
+        if (ora >= 10 && minute >= 10)
+            return `${ora}:${minute}`;
+        else if (ora >= 10 && minute < 10) {
+            return `${ora}:0${minute}`;
+        }
+        else if (ora < 10 && minute >= 10) {
+            return `0${ora}:${minute}`;
+        }
+        else if (ora < 10 && minute < 10) {
+            return `0${ora}:0${minute}`;
+        }
     }
 
+
     return (<div className="feedbackFormDiv">
+        <br></br>
+        <div className = "textBox">
         <h1 id="denCurs">Oferiti feedback pentru cursul {curs.denumire}</h1>
-        <h1 id="denCurs">Ora incepere curs: {curs.data.substring(11,16)}</h1>
-        <h1 id="denCurs">Ora incheiere curs: {stringOraFinal(curs.data.substring(11,16))}</h1>
+        <h1 id="denCurs">Ora incepere curs: {parseOra(curs.data.substring(11, 16))}</h1>
+        <h1 id="denCurs">Ora incheiere curs: {stringOraFinal(curs.data.substring(11, 16))}</h1>
+        </div>
         <div>
             <div className="quarter" onClick={() => { setTip(1); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128512;</div>
             <div className="quarter" onClick={() => { setTip(2); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128543;</div>
             <div className="quarter" onClick={() => { setTip(3); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128558;</div>
             <div className="quarter" onClick={() => { setTip(4); set('id', `${uuidv4()}`); setData(); sendFeedback(); }}>&#128533;</div>
+            <div></div>
         </div>
     </div>)
 }

@@ -1,6 +1,7 @@
 function Intro(){
     return(
         <div>
+            <br></br><br></br>
             <h1 id="titlu">Alegeti tipul de cont</h1>
             <div className="intro">
                 <div id="profesor">

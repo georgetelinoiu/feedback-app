@@ -22,14 +22,14 @@ function ProfesorForm() {
     function getDate() {
         var date;
         date = new Date();
-        date = date.getUTCFullYear() + '-' +
-            ('00' + (date.getUTCMonth() + 1)).slice(-2) + '-' +
-            ('00' + date.getUTCDate()).slice(-2) + ' ' +
-            ('00' + date.getUTCHours()).slice(-2) + ':' +
-            ('00' + date.getUTCMinutes()).slice(-2) + ':' +
-            ('00' + date.getUTCSeconds()).slice(-2);
+        date = date.getFullYear() + '-' +
+            ('00' + (date.getMonth() + 1)).slice(-2) + '-' +
+            ('00' + date.getDate()).slice(-2) + ' ' +
+            ('00' + date.getHours()).slice(-2) + ':' +
+            ('00' + date.getMinutes()).slice(-2) + ':' +
+            ('00' + date.getSeconds()).slice(-2);
         return date;
-    }
+    }  
 
 
     async function createProfesor() {
@@ -76,13 +76,13 @@ function ProfesorForm() {
                     <div className="input-container ic1">
                     <input value={profesor.nume}
                         onChange={event => set('nume', event.target.value)} className = "input"></input>
-                        <div className="cut"></div>
+                        <div className="cut cut-short"></div>
                         <label htmlFor="firstname" className="placeholder">Nume</label>
                     </div>
                     <div className="input-container ic2">
                     <input value={profesor.prenume}
                         onChange={event => set('prenume', event.target.value) } className = "input"></input>
-                        <div className="cut"></div>
+                        <div className="cut cut-short"></div>
                         <label htmlFor="lastname" className="placeholder">Prenume</label>
                     </div>
                     <div className="input-container ic2">

@@ -31,7 +31,7 @@ function CursuriForm() {
         }
     }
 
-    useEffect(() => {setInterval(loadFeedbacks(),1000)}, []);
+    useEffect(() => {loadFeedbacks()}, []);
 
     const loadCurs = async (cursId) => {
         const response = await fetch(`/api/cursuri/${cursId}`);
@@ -49,6 +49,9 @@ function CursuriForm() {
     }
 
 
+    setTimeout(function(){
+        window.location.reload(1);
+     }, 8000);
 
     function setC(property, value) {
         const newCurs = { ...curs };
@@ -68,7 +71,9 @@ function CursuriForm() {
 
     return (
         <div className="infoCurs">
-            <h1>Buna ziua domnule profesor{profesor.nume}! In acest moment vizionati feedback pentru cursul {curs.denumire}, ID: {curs.id}</h1>
+            <br></br>
+            <h1>Buna ziua! In acest moment vizionati feedback pentru cursul {curs.denumire}</h1>
+            <h1>ID curs: {curs.id}</h1>
             <div className="incarcareFeedbacks">
                 <br></br>
                 <ul>

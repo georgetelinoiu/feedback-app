@@ -49,13 +49,13 @@ function StudentForm() {
                 <div className="input-container ic1">
                 <input value={student.nume}
                     onChange={event => set('nume', event.target.value)} className = "input"></input>
-                    <div className="cut"></div>
+                    <div className="cut cut-short"></div>
                     <label htmlFor="firstname" className="placeholder">Nume</label>
                 </div>
                 <div className="input-container ic2">
                 <input value={student.prenume}
                     onChange={event => set('prenume', event.target.value) } className = "input"></input>
-                    <div className="cut"></div>
+                    <div className="cut cut-short"></div>
                     <label htmlFor="lastname" className="placeholder">Prenume</label>
                 </div>
                 <div className="input-container ic2">
